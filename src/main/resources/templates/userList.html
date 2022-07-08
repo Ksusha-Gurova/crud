@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Users</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+<h2>List of users</h2>
+
+<table>
+
+    <tr>
+        <th>Id</th>
+        <th>Full name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Date of birth</th>
+        <th>Actions</th>
+    </tr>
+
+    <form th:method="GET" th:action="@{'/users/add'}" >
+        <input type="submit" value="CREATE NEW USER" />
+    </form>
+
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.fullname}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.phone}"></td>
+        <td th:text="${user.address}"></td>
+        <td th:text="${user.dateOfBirth}"></td>
+        <td>
+            <form th:method="POST" th:action="@{'/users/' + ${user.id} + '/edit'}" >
+                <input type="submit" value="EDIT" />
+            </form>
+        </td>
+        <td>
+            <form th:method="POST" th:action="@{'/users/' + ${user.id} + '/delete'}" >
+                <input type="submit" value="DELETE" />
+            </form>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>
